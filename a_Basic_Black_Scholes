@@ -1,0 +1,38 @@
+import matplotlib
+import pandas as pd
+import datetime as dt
+import math
+import numpy as np
+import time
+import yfinance as yf
+from scipy.stats import norm
+from matplotlib import pyplot as plt
+
+# S is underlying price, the real value of the equity 
+S = 50
+
+# K is the strike price, or agreed call/put price in an option  
+K = 60
+
+# T is the time to expiration
+T = 0.5
+
+# r is the risk-free rate 
+r = 0.1
+
+# volatility (sigma)
+vol = 0.2 
+
+# volatility increases the value of both puts and calls, when volatility is high certanty has a higher premium
+
+d1 = (np.log(S/K) + (r + 0.5*(vol**2))*T)/(vol*math.sqrt(T))  
+
+d2 = d1 - vol*(math.sqrt(T))
+
+# calculate call option price
+
+C =  S * norm.cdf(d1) - K * math.exp(-r * T) * norm.cdf(d2)
+
+# calculate put option price
+
+P = K * math.exp(-r * T) * norm.cdf(-d2) - S * norm.cdf(-d1)
