@@ -1,15 +1,13 @@
-import matplotlib
 import pandas as pd
 import datetime as dt
 import math
 import numpy as np
-import time
 import yfinance as yf
 from scipy.stats import norm
 from matplotlib import pyplot as plt
 
-
-# the Black Scholes model is a widespread formula for pricing European-style options 
+# the Black Scholes model is the most widely used formula for pricing European-style options 
+# this is a deterministic version, exluding Brownian motion for the time being
 
 # S is underlying price, the real value of the equity 
 S = 52
@@ -46,6 +44,6 @@ C =  S * norm.cdf(d1) - K * math.exp(-r * T) * norm.cdf(d2)
 P = K * math.exp(-r * T) * norm.cdf(-d2) - S * norm.cdf(-d1)
 
 print("The value of d1 is: " + str(round(d1,4)))
-print("The value of d2 is: " + str(round(d1,4)))
-print("The price of this call option is $" + round(C,2))
-print("The price of this put option is $" + round(P,2))
+print("The value of d2 is: " + str(round(d2,4)))
+print("The price of this call option is $", float(round(C,2)))
+print("The price of this put option is $", float(round(P,2)))
