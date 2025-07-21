@@ -59,3 +59,11 @@ def heston_model(S, v0, rho, kappa, theta, sigma, T, N, M):
 
     # sampling correlated brownian motion
     Z = np.random.multivariate_normal(mu, cov (N,M))
+
+    # first we can compute changes in volatility 
+
+    # now we compute changes in stock price based using the previous value
+    # this is a time-addative version of the ds equation, employing Ito's Lemma 
+    S[i] = S[i-1] + np.exp((r-0.5*V[i-1])*dt + np.sqrt(V[i-1]*dt)*Z[i-1:,0])
+    
+    
