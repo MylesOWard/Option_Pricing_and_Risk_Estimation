@@ -62,7 +62,7 @@ def heston_model(S, v0, rho, kappa, theta, sigma, T, N, M):
     Z = np.random.multivariate_normal(mu, cov, (N,M))
 
     # first we can compute changes in stock price based using the previous volatility value
-    # this is a time-addative version of the ds equation, employing Ito's Lemma 
+    # this is a time-addative version of the ds equation, employing Ito's Lemma (stochastic calculus)
     for i in range (1,N+1):
         # using logorithms to ensure calculations are time-addative
         S[i] = S[i-1] * np.exp((r - 0.5*V[i-1])*dt + np.sqrt(V[i-1]*dt)*Z[i-1,:,0])
